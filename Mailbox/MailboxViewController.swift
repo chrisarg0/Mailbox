@@ -76,12 +76,20 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     
     @IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
         
+        // Common properties to access from each gesture recognizer
         let location = sender.location(in: view)
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
+        
+        // define what happens next
     }
 
     @IBAction func didScreenPanEdgeLeft(_ sender: UIScreenEdgePanGestureRecognizer) {
+        // Common properties to access from each gesture recognizer
+        
+
+        // define what happens next
+
     }
     
     
