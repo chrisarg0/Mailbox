@@ -18,69 +18,75 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     @IBOutlet weak var listView: UIImageView!
     @IBOutlet weak var parentView: UIView!
     
-    // gesture recognizer outlets
-    @IBOutlet var screenEdgePanLeft: UIScreenEdgePanGestureRecognizer!
-    @IBOutlet var panGesture: UIPanGestureRecognizer!
+    var originalCenter: CGPoint!
+    var messageLeft: CGPoint!
+    var messageRight: CGPoint!
+    var messageOffset: CGFloat!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageOffset = 100
+        messageLeft = CGPoint(x: messageView.center.x + messageOffset, y: messageView.center.y)
         
         scrollView.contentSize = CGSize(width: 375, height: 1508)
-        
+        scrollView.delegate = self
+
         // Whats wrong with this?
         //scrollView.contentSize = CGSize(feedImageView.frame.size + messageView.frame.size)
-        
-        scrollView.delegate = self
-        
-        // set gesture recognizer delegate
-        panGesture.delegate = self
+    
         
         ////////////////////////////////////////
         // INSTANTIATE PAN GESTURE RECOGNIZER //
         ////////////////////////////////////////
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panMessage(sender: panGesture)))
+        // let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panMessage(sender:)))
         
         // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
-        messageView.isUserInteractionEnabled = true
-        messageView.addGestureRecognizer(panGestureRecognizer)
+        //messageView.isUserInteractionEnabled = true
+        //messageView.addGestureRecognizer(panGestureRecognizer)
         
         ////////////////////////////////////////////////////
         // INSTANTIATE SCREEN EDGE PAN GESTURE RECOGNIZER //
         ///////////////////////////////////////////////////
         
-        let screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(didScreenPanEdgeLeft(sender: screenEdgePanLeft)))
+        //let screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(didScreenPanEdgeLeft(sender:)))
         
         // Configure the screen edges you want to detect.
-        screenEdgePanGestureRecognizer.edges = UIRectEdge.left
+        //screenEdgePanGestureRecognizer.edges = UIRectEdge.left
         
         // Attach the screen edge pan gesture recognizer to some view.
-        parentView.isUserInteractionEnabled = true
-        parentView.addGestureRecognizer(screenEdgePanGestureRecognizer)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        //parentView.isUserInteractionEnabled = true
+        //parentView.addGestureRecognizer(screenEdgePanGestureRecognizer)
     
     ////////////////////////////////////////////////
     // Gesture Recognizer Protocol Implementation //
     ///////////////////////////////////////////////
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+    //func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+      //  return true
         // allows multiple gesture recognizes to be used simultaneously
     }
     
-    @IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
+
+@IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
         
         // Common properties to access from each gesture recognizer
-        let location = sender.location(in: view)
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
+    
+    if sender.state == .began {
         
+        originalCenter = messageView.center
+        
+    } else if sender.state == .changed {
+        
+        messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
+        
+    } else if sender.state == .ended {
+    
+    }
+    
         // define what happens next
     }
 

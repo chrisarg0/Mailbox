@@ -41,6 +41,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    /***  3D Touch (Handle Quick Actions) ***/
+    
+    private func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        let handledShortCutItem = handleShortCutItem(shortcutItem: shortcutItem)
+        
+        //the line below calls our handledShortCutItem func
+        completionHandler(handledShortCutItem)
+    }
+    
+    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        // this is where we define what happens when we click on a shortcut. see if we can direct the user to a screen to compose a message
+        let alertController = UIAlertController(title: "Shortcut Action", message: "\"\(shortcutItem.localizedTitle)\"", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        window!.rootViewController?.present(alertController, animated: true, completion: nil)
+        
+        return true
+    }
 }
+
+
 
