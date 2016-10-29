@@ -9,7 +9,7 @@
 import UIKit
 
 class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-
+    
     // view outlets
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var feedImageView: UIImageView!
@@ -50,10 +50,10 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         
         scrollView.contentSize = CGSize(width: 375, height: 1508)
         scrollView.delegate = self
-
+        
         // Whats wrong with this?
         //scrollView.contentSize = CGSize(feedImageView.frame.size + messageView.frame.size)
-    
+        
         
         ////////////////////////////////////////
         // INSTANTIATE PAN GESTURE RECOGNIZER //
@@ -77,77 +77,110 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         // Attach the screen edge pan gesture recognizer to some view.
         //parentView.isUserInteractionEnabled = true
         //parentView.addGestureRecognizer(screenEdgePanGestureRecognizer)
-    
-    ////////////////////////////////////////////////
-    // Gesture Recognizer Protocol Implementation //
-    ///////////////////////////////////////////////
-    
-    //func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-      //  return true
+        
+        ////////////////////////////////////////////////
+        // Gesture Recognizer Protocol Implementation //
+        ///////////////////////////////////////////////
+        
+        //func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        //  return true
         // allows multiple gesture recognizes to be used simultaneously
     }
+        
+        @IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
+            
+            // Common properties to access from each gesture recognizer
+            let translation = sender.translation(in: view)
+            let velocity = sender.velocity(in: view)
+            
+            if sender.state == .began {
+                
+                originalCenter = messageView.center
+                messageLeft = leftPanView.center
+                messageRight = rightPanView.center
+                
+            } else if sender.state == .changed {
+                
+                messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
+                
+                if translation.x < 0 && translation.x > -60 {
+                    
+                    leftButtonSet.backgroundColor = UIColor.gray
+                    laterIcon.alpha = 1
+                    
+                    //leftPanView.backgroundColor = UIColor.gray
+                    
+                    
+                } else if translation.x <= -60 {
+                    
+                    leftButtonSet.backgroundColor = UIColor.yellow
+                    laterIcon.alpha = 0
+                    listIcon.alpha = 1
+                    //leftPanView.backgroundColor = UIColor.yellow
+                    
+                } else if translation.x > 0 && translation.x <= 60 {
+                    
+                    rightButtonSet.backgroundColor = UIColor.gray
+                    archiveIcon.alpha = 1
+                    
+                } else if translation.x > 60 {
+                    
+                    rightButtonSet.backgroundColor = UIColor.green
+                    archiveIcon.alpha = 0
+                    deleteIcon.alpha = 1
+                    
+                    
+                }
+                
+            } else if sender.state == .ended {
+                
+            }
+            
+            // define what happens next
+        }
     
+        var interactor = Interactor()
 
-@IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
-        
-        // Common properties to access from each gesture recognizer
-        let translation = sender.translation(in: view)
-        let velocity = sender.velocity(in: view)
     
-    if sender.state == .began {
-        
-        originalCenter = messageView.center
-        messageLeft = leftPanView.center
-        messageRight = rightPanView.center
-        
-    } else if sender.state == .changed {
-        
-        messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
-        
-        if translation.x < 0 && translation.x > -60 {
-            
-            leftButtonSet.backgroundColor = UIColor.gray
-            laterIcon.alpha = 1
-
-            //leftPanView.backgroundColor = UIColor.gray
-
-            
-        } else if translation.x <= -60 {
-            
-            leftButtonSet.backgroundColor = UIColor.yellow
-            laterIcon.alpha = 0
-            listIcon.alpha = 1
-            //leftPanView.backgroundColor = UIColor.yellow
-        
-        } else if translation.x > 0 && translation.x <= 60 {
-            
-            rightButtonSet.backgroundColor = UIColor.gray
-            archiveIcon.alpha = 1
-            
-        } else if translation.x > 60 {
-            
-            rightButtonSet.backgroundColor = UIColor.green
-            archiveIcon.alpha = 0
-            deleteIcon.alpha = 1
-            
+        @IBAction func openMenu(_ sender: AnyObject) {
+            performSegue(withIdentifier: "openMenu", sender: nil)
             
         }
         
-    } else if sender.state == .ended {
-    
+        @IBAction func didScreenPanEdgeLeft(_ sender: UIScreenEdgePanGestureRecognizer) {
+            let translation = sender.translation(in: view)
+            
+            let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
+            
+            MenuHelper.mapGestureStateToInteractor(
+                gestureState: sender.state,
+                progress: progress,
+                interactor: interactor){
+                    self.performSegue(withIdentifier: "openMenu", sender: nil)
+            }
+            
+        }
+
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationViewController = segue.destination as? MailboxViewController {
+            destinationViewController.transitioningDelegate = self
+            destinationViewController.interactor = interactor
+        }
     }
     
-        // define what happens next
+}
+
+extension MailboxViewController: UIViewControllerTransitioningDelegate {
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
     }
-
-    @IBAction func didScreenPanEdgeLeft(_ sender: UIScreenEdgePanGestureRecognizer) {
-        // Common properties to access from each gesture recognizer
-        
-
-        // define what happens next
-
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
     }
-    
-    
-
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
 }
