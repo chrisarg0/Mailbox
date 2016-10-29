@@ -2,14 +2,14 @@
 
 The purpose of this homework is to leverage animations and gestures to implement more sophisticated interactions. We're going to use the techniques from this week to implement the Mailbox interactions.
 
-Time spent: 2
+Time spent: 4
 
 ### Features
 
 #### Required
 
 - [ ] On dragging the message left:
-  - [ ] Initially, the revealed background color should be gray.
+  - [x] Initially, the revealed background color should be gray.
   - [ ] As the reschedule icon is revealed, it should start semi-transparent and become fully opaque. If released at this point, the message should return to its initial position.
   - [ ] After 60 pts, the later icon should start moving with the translation and the background should change to yellow.
     - [ ] Upon release, the message should continue to reveal the yellow background. When the animation it complete, it should show the reschedule options.
@@ -18,7 +18,7 @@ Time spent: 2
 
 - [ ] User can tap to dismiss the reschedule or list options. After the reschedule or list options are dismissed, you should see the message finish the hide animation.
 - [ ] On dragging the message right:
-  - [ ] Initially, the revealed background color should be gray.
+  - [x] Initially, the revealed background color should be gray.
   - [ ] As the archive icon is revealed, it should start semi-transparent and become fully opaque. If released at this point, the message should return to its initial position.
   - [ ] After 60 pts, the archive icon should start moving with the translation and the background should change to green.
     - [ ] Upon release, the message should continue to reveal the green background. When the animation it complete, it should hide the message.
@@ -37,7 +37,9 @@ Time spent: 2
 
 #### The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [ ] I thought a 3D touch feature seemed appropriate for any legitimate email app, so I added it for Mailbox
+- [ ] I included a quick action to compose an email inside the 3D touch window - clicking "New Message" will bring you directly to your compose email view
+- [ ] ..
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
