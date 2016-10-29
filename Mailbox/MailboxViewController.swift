@@ -18,6 +18,19 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     @IBOutlet weak var listView: UIImageView!
     @IBOutlet weak var parentView: UIView!
     
+    // message views
+    @IBOutlet weak var leftPanView: UIView!
+    @IBOutlet weak var rightPanView: UIView!
+    @IBOutlet weak var leftButtonSet: UIImageView!
+    @IBOutlet weak var rightButtonSet: UIImageView!
+    
+    // icons
+    @IBOutlet weak var laterIcon: UIImageView!
+    @IBOutlet weak var listIcon: UIImageView!
+    @IBOutlet weak var archiveIcon: UIImageView!
+    @IBOutlet weak var deleteIcon: UIImageView!
+    
+    // global variables
     var originalCenter: CGPoint!
     var messageLeft: CGPoint!
     var messageRight: CGPoint!
@@ -26,8 +39,14 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        laterIcon.alpha = 0
+        listIcon.alpha = 0
+        archiveIcon.alpha = 0
+        deleteIcon.alpha = 0
+        
         messageOffset = 100
-        messageLeft = CGPoint(x: messageView.center.x + messageOffset, y: messageView.center.y)
+        // messageLeft = CGPoint(x: messageView.center.x + messageOffset, y: messageView.center.y)
+        // messageRight = CGPoint(x: messageView.center.x - messageOffset, y: messageView.center.y)
         
         scrollView.contentSize = CGSize(width: 375, height: 1508)
         scrollView.delegate = self
@@ -78,10 +97,41 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     if sender.state == .began {
         
         originalCenter = messageView.center
+        messageLeft = leftPanView.center
+        messageRight = rightPanView.center
         
     } else if sender.state == .changed {
         
         messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
+        
+        if translation.x < 0 && translation.x > -60 {
+            
+            leftButtonSet.backgroundColor = UIColor.gray
+            laterIcon.alpha = 1
+
+            //leftPanView.backgroundColor = UIColor.gray
+
+            
+        } else if translation.x <= -60 {
+            
+            leftButtonSet.backgroundColor = UIColor.yellow
+            laterIcon.alpha = 0
+            listIcon.alpha = 1
+            //leftPanView.backgroundColor = UIColor.yellow
+        
+        } else if translation.x > 0 && translation.x <= 60 {
+            
+            rightButtonSet.backgroundColor = UIColor.gray
+            archiveIcon.alpha = 1
+            
+        } else if translation.x > 60 {
+            
+            rightButtonSet.backgroundColor = UIColor.green
+            archiveIcon.alpha = 0
+            deleteIcon.alpha = 1
+            
+            
+        }
         
     } else if sender.state == .ended {
     

@@ -42,16 +42,42 @@
                                         <frame key="frameInset" minY="154" maxY="-995"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Rectangle1" id="LBR-xo-bh1" userLabel="RightButtonSet">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="vHg-3W-1su" userLabel="ScrollLeft">
+                                                <rect key="frame" x="0.0" y="0.0" width="750" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.98256606540000002" green="0.28627450980000002" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Rectangle" id="rLg-r5-ICb" userLabel="LeftButtonSet">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="rLg-r5-ICb" userLabel="LeftButtonSet">
+                                                        <frame key="frameInset" width="750" height="100"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="later_icon" id="tdH-7V-HSY">
+                                                        <frame key="frameInset" minX="390" minY="37" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="list_icon" id="RJC-HR-X3u">
+                                                        <frame key="frameInset" minX="390" minY="37" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </view>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="qbZ-fW-Dys" userLabel="ScrollRight">
+                                                <rect key="frame" x="0.0" y="0.0" width="750" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.81568627449999997" green="0.0078431372550000003" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="LBR-xo-bh1" userLabel="RightButtonSet">
+                                                        <frame key="frameInset" width="750" height="100"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="archive_icon" id="nww-hg-UhT">
+                                                        <frame key="frameInset" minX="15" minY="37" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="delete_icon" id="1wr-au-25g">
+                                                        <frame key="frameInset" minX="15" minY="37" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </view>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFill" misplaced="YES" image="reschedule" id="0nB-Ro-Uvv">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                 <autoresizingMask key="autoresizingMask"/>
@@ -81,6 +107,16 @@
                                             </imageView>
                                         </subviews>
                                     </scrollView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="Wrd-jQ-Wfy">
+                                        <frame key="frameInset" minX="94" minY="18" width="187" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="" image="later_nav_icon"/>
+                                            <segment title="" image="mail_nav_icon"/>
+                                            <segment title="" image="archive_icon"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.31701990962028503" green="0.72398984432220459" blue="0.8580285906791687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -90,11 +126,19 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1662"/>
                     <connections>
+                        <outlet property="archiveIcon" destination="nww-hg-UhT" id="Fir-j1-Aht"/>
+                        <outlet property="deleteIcon" destination="1wr-au-25g" id="r1F-Os-hAc"/>
                         <outlet property="feedImageView" destination="HBb-gA-JLW" id="Zbg-8j-ajm"/>
+                        <outlet property="laterIcon" destination="tdH-7V-HSY" id="xHZ-XS-IaU"/>
+                        <outlet property="leftButtonSet" destination="rLg-r5-ICb" id="zSr-el-JXf"/>
+                        <outlet property="leftPanView" destination="vHg-3W-1su" id="swm-uY-YPh"/>
+                        <outlet property="listIcon" destination="RJC-HR-X3u" id="70t-iH-0Sr"/>
                         <outlet property="listView" destination="hKu-dp-GaE" id="2Z6-Hf-erb"/>
                         <outlet property="messageView" destination="YoY-ES-UEz" id="17S-sj-D1B"/>
                         <outlet property="parentView" destination="Kv5-K2-WYT" id="gQr-7v-Md4"/>
                         <outlet property="reschedulView" destination="0nB-Ro-Uvv" id="CZV-jU-DCG"/>
+                        <outlet property="rightButtonSet" destination="LBR-xo-bh1" id="jLd-Gp-h3G"/>
+                        <outlet property="rightPanView" destination="qbZ-fW-Dys" id="kW2-Do-qjA"/>
                         <outlet property="scrollView" destination="0FJ-al-XW0" id="d2r-7z-pi3"/>
                     </connections>
                 </viewController>
@@ -114,11 +158,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Rectangle" width="466" height="239"/>
-        <image name="Rectangle1" width="466" height="239"/>
+        <image name="archive_icon" width="25" height="25"/>
+        <image name="delete_icon" width="25" height="25"/>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
+        <image name="later_icon" width="25" height="25"/>
+        <image name="later_nav_icon" width="25" height="20"/>
         <image name="list" width="320" height="568"/>
+        <image name="list_icon" width="25" height="25"/>
+        <image name="mail_nav_icon" width="25" height="20"/>
         <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
