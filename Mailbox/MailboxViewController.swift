@@ -112,16 +112,12 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                     rightButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
                     archiveIcon.alpha = 0.5
                     deleteIcon.alpha = 0
-                    //leftPanView.backgroundColor = UIColor.gray
-                    
                     
                 } else if translation.x >= 60 && translation.x < 260 {
                     // show green
                     rightButtonSet.backgroundColor = UIColor(red:0.25, green:0.76, blue:0.43, alpha:1.00)
                     archiveIcon.alpha = 1
-                    deleteIcon.alpha = 0
-                    //leftPanView.backgroundColor = UIColor.yellow
-                    
+                    deleteIcon.alpha = 0                    
                 } else if translation.x >= 260 {
                     // show red 
                     rightButtonSet.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.19, alpha:1.00)
