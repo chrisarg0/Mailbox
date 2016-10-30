@@ -58,6 +58,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window!.rootViewController?.present(alertController, animated: true, completion: nil)
         
+//        for performSegue
+//        Get root navigation viewcontroller and its first controller
+//        let rootNavigationViewController = window!.rootViewController as? UINavigationController
+//        let rootViewController = rootNavigationViewController?.viewControllers.first as UIViewController?
+//        
+//        Pop to root view controller so that approperiete segue can be performed
+//        rootNavigationViewController?.popToRootViewControllerAnimated(false)
+//        
+//        switch shortcutType {
+//        case .View1:
+//            handled = true
+//        case.View2:
+//            rootViewController?.performSegueWithIdentifier("toView2", sender: nil)
+//            handled = true
+//        }
+//    }
+    
         return true
     }
 }

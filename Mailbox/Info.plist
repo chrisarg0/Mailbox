@@ -39,26 +39,14 @@
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeSearch</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Item1</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Shortcut Item 1</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>This is item 1</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict/>
-		</dict>
-		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
 			<string>edit_60</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Item2</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Item1</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Shortcut Item 2</string>
+			<string>New Message</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>This is item 2</string>
+			<string></string>
 			<key>UIApplicationShortcutItemUserInfo</key>
 			<dict/>
 		</dict>

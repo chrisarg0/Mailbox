@@ -1,9 +1,9 @@
-//
-//  PresentMenuAnimator.swift
-//  Mailbox
-//
-//  Created by Chris Argonish on 10/29/16.
-//  Copyright © 2016 Chris. All rights reserved.
+////
+////  PresentMenuAnimator.swift
+////  Mailbox
+////
+////  Created by Chris Argonish on 10/29/16.
+////  Copyright © 2016 Chris. All rights reserved.
 //
 
 import UIKit
@@ -19,19 +19,19 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-            let containerView = transitionContext.containerView
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
             else {
                 return
         }
         // more code goes here
+        let containerView = transitionContext.containerView
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
         let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
         snapshot?.tag = MenuHelper.snapshotNumber
         snapshot?.isUserInteractionEnabled = false
         snapshot?.layer.shadowOpacity = 0.7
-        containerView.insertSubview(snapshot, aboveSubview: toVC.view)
+        containerView.insertSubview(snapshot!, aboveSubview: toVC.view)
         fromVC.view.isHidden = true
         
         UIView.animate(

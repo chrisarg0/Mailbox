@@ -1,9 +1,9 @@
-//
-//  DismissMenuAnimator.swift
-//  Mailbox
-//
-//  Created by Chris Argonish on 10/29/16.
-//  Copyright © 2016 Chris. All rights reserved.
+////
+////  DismissMenuAnimator.swift
+////  Mailbox
+////
+////  Created by Chris Argonish on 10/29/16.
+////  Copyright © 2016 Chris. All rights reserved.
 //
 
 import UIKit
@@ -19,22 +19,22 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
-            let containerView = transitionContext.containerView
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
             else {
                 return
         }
         // 1
+        let containerView = transitionContext.containerView
         let snapshot = containerView.viewWithTag(MenuHelper.snapshotNumber)
         
-        UIView.animateWithDuration(
-            transitionDuration(transitionContext),
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
             animations: {
                 // 2
-                snapshot?.frame = CGRect(origin: CGPoint.zero, size: UIScreen.mainScreen().bounds.size)
+                snapshot?.frame = CGRect(origin: CGPoint.zero, size: UIScreen.main.bounds.size)
             },
             completion: { _ in
-                let didTransitionComplete = !transitionContext.transitionWasCancelled()
+                let didTransitionComplete = !transitionContext.transitionWasCancelled
                 if didTransitionComplete {
                     // 3
                     containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
