@@ -11,8 +11,11 @@ import UIKit
 class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     // view outlets
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var feedImageView: UIImageView!
+    @IBOutlet weak var archiveFeedView: UIImageView!
+    @IBOutlet weak var laterFeedView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var reschedulView: UIImageView!
     @IBOutlet weak var listView: UIImageView!
@@ -35,7 +38,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     var messageLeft: CGPoint!
     var messageRight: CGPoint!
     var messageOffset: CGFloat!
-    
+    var scrollViewOffset: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +47,12 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         archiveIcon.alpha = 0
         deleteIcon.alpha = 0
         
+        
         messageOffset = 100
         // messageLeft = CGPoint(x: messageView.center.x + messageOffset, y: messageView.center.y)
         // messageRight = CGPoint(x: messageView.center.x - messageOffset, y: messageView.center.y)
         
-        scrollView.contentSize = CGSize(width: 375, height: 1508)
+        scrollView.contentSize = CGSize(width: 1125, height: 1508)
         scrollView.delegate = self
         
         // Whats wrong with this?
@@ -86,9 +90,9 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         //  return true
         // allows multiple gesture recognizes to be used simultaneously
     }
-        
+
         @IBAction func panMessage(_ sender: UIPanGestureRecognizer) {
-            
+            // THIS NEEDS SOME WORK
             // Common properties to access from each gesture recognizer
             let translation = sender.translation(in: view)
             let velocity = sender.velocity(in: view)
@@ -103,33 +107,42 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                 
                 messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
                 
-                if translation.x < 0 && translation.x > -60 {
-                    
-                    leftButtonSet.backgroundColor = UIColor.gray
-                    laterIcon.alpha = 1
-                    
+                if translation.x > 0 && translation.x < 60 {
+                    // show grey, sliding right
+                    rightButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
+                    archiveIcon.alpha = 0.5
+                    deleteIcon.alpha = 0
                     //leftPanView.backgroundColor = UIColor.gray
                     
                     
-                } else if translation.x <= -60 {
-                    
-                    leftButtonSet.backgroundColor = UIColor.yellow
-                    laterIcon.alpha = 0
-                    listIcon.alpha = 1
+                } else if translation.x >= 60 && translation.x < 260 {
+                    // show green
+                    rightButtonSet.backgroundColor = UIColor(red:0.25, green:0.76, blue:0.43, alpha:1.00)
+                    archiveIcon.alpha = 1
+                    deleteIcon.alpha = 0
                     //leftPanView.backgroundColor = UIColor.yellow
                     
-                } else if translation.x > 0 && translation.x <= 60 {
-                    
-                    rightButtonSet.backgroundColor = UIColor.gray
-                    archiveIcon.alpha = 1
-                    
-                } else if translation.x > 60 {
-                    
-                    rightButtonSet.backgroundColor = UIColor.green
+                } else if translation.x >= 260 {
+                    // show red 
+                    rightButtonSet.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.19, alpha:1.00)
                     archiveIcon.alpha = 0
                     deleteIcon.alpha = 1
+                } else if translation.x < 0 && translation.x > -60 {
+                    // show grey, sliding left
+                    leftButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
+                    laterIcon.alpha = 0.5
+                    listIcon.alpha = 0
                     
-                    
+                } else if translation.x <= -60 && translation.x > -260 {
+                    // show yellow
+                    leftButtonSet.backgroundColor = UIColor(red:0.97, green:0.91, blue:0.11, alpha:1.00)
+                    laterIcon.alpha = 1
+                    listIcon.alpha = 0
+                } else if translation.x <= -260 {
+                    // show brown
+                    leftButtonSet.backgroundColor = UIColor(red:0.55, green:0.34, blue:0.16, alpha:1.00)
+                    laterIcon.alpha = 0
+                    listIcon.alpha = 1
                 }
                 
             } else if sender.state == .ended {
@@ -146,7 +159,37 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             performSegue(withIdentifier: "openMenu", sender: nil)
             
         }
+    
+    @IBAction func indexChanged(_ sender: AnyObject) {
         
+        
+            switch segmentedControl.selectedSegmentIndex
+            {
+            case 0:
+                UIView.animate(withDuration: 0.3) {
+                    self.laterFeedView.center.x = self.laterFeedView.center.x + 375
+                }
+            case 1:
+                // THIS NEEDS SOME WORK
+                UIView.animate(withDuration: 0.3) {
+                    if self.laterFeedView.center.x == 375 {
+                        self.laterFeedView.center.x = 0
+                    } else if self.archiveFeedView.center.x == 375 {
+                        self.archiveFeedView.center.x = 750
+                    }
+                }
+
+                scrollView.center.x = 0
+            case 2:
+                UIView.animate(withDuration: 0.3) {
+                    self.archiveFeedView.center.x = self.archiveFeedView.center.x - 375                }
+            default:
+                break; 
+            }
+    }
+    
+// Screen Pan Edge Left
+    
         @IBAction func didScreenPanEdgeLeft(_ sender: UIScreenEdgePanGestureRecognizer) {
             let translation = sender.translation(in: view)
             
@@ -161,6 +204,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             
         }
 
+// For custom menu animation
+    
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destinationViewController = segue.destination as? MailboxViewController {
             destinationViewController.transitioningDelegate = self

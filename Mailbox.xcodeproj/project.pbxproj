@@ -20,6 +20,8 @@
 		019DC9CD1DC558390009B93D /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC9CC1DC558390009B93D /* MenuHelper.swift */; };
 		019DC9CF1DC558E10009B93D /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC9CE1DC558E10009B93D /* PresentMenuAnimator.swift */; };
 		019F2AC31DC5648E00CB7D6E /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F2AC21DC5648E00CB7D6E /* DismissMenuAnimator.swift */; };
+		019F2AC51DC57D8A00CB7D6E /* ComposeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F2AC41DC57D8A00CB7D6E /* ComposeEmailViewController.swift */; };
+		019F2AC71DC5851D00CB7D6E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F2AC61DC5851D00CB7D6E /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		019DC9CC1DC558390009B93D /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
 		019DC9CE1DC558E10009B93D /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		019F2AC21DC5648E00CB7D6E /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
+		019F2AC41DC57D8A00CB7D6E /* ComposeEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeEmailViewController.swift; sourceTree = "<group>"; };
+		019F2AC61DC5851D00CB7D6E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				019DC9CC1DC558390009B93D /* MenuHelper.swift */,
 				019DC9CE1DC558E10009B93D /* PresentMenuAnimator.swift */,
 				019F2AC21DC5648E00CB7D6E /* DismissMenuAnimator.swift */,
+				019F2AC41DC57D8A00CB7D6E /* ComposeEmailViewController.swift */,
+				019F2AC61DC5851D00CB7D6E /* Common.swift */,
 			);
 			path = Mailbox;
 			sourceTree = "<group>";
@@ -285,8 +291,10 @@
 				019DC9CF1DC558E10009B93D /* PresentMenuAnimator.swift in Sources */,
 				013F0C611DBF489E007023EB /* ViewController.swift in Sources */,
 				013F0C5F1DBF489E007023EB /* AppDelegate.swift in Sources */,
+				019F2AC51DC57D8A00CB7D6E /* ComposeEmailViewController.swift in Sources */,
 				019DC9CB1DC557BF0009B93D /* Interactor.swift in Sources */,
 				0136B34B1DC1135A00A04FB7 /* MailboxViewController.swift in Sources */,
+				019F2AC71DC5851D00CB7D6E /* Common.swift in Sources */,
 				019DC9C91DC5572B0009B93D /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
