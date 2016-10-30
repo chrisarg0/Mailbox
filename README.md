@@ -40,7 +40,7 @@ Time spent: 4
 
 - [ ] I thought a 3D touch feature seemed appropriate for any legitimate email app, so I added it for Mailbox
 - [ ] I included a quick action to compose an email inside the 3D touch window - clicking "New Message" will bring you directly to your compose email view
-- [ ] ..
+- [x] Added a timed activity indicator and "email sent" animations when user clicks "Send" button from Compose Email view controller
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
