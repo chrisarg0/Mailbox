@@ -167,8 +167,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             {
             case 0:
                 UIView.animate(withDuration: 0.3) {
-                    self.scrollView.center.x = self.scrollView.frame.origin.x
-                    self.scrollView.center.y = self.scrollView.frame.origin.y
+                    // self.scrollView.center.x = self.scrollView.frame.origin.x
+                    // self.scrollView.center.y = self.scrollView.frame.origin.y
                     self.laterFeedView.center.x = self.laterFeedView.frame.origin.x + 375
                     self.laterFeedView.center.y = self.laterFeedView.frame.origin.y
                 }
