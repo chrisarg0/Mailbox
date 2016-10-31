@@ -52,11 +52,11 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         // messageLeft = CGPoint(x: messageView.center.x + messageOffset, y: messageView.center.y)
         // messageRight = CGPoint(x: messageView.center.x - messageOffset, y: messageView.center.y)
         
-        scrollView.contentSize = CGSize(width: 1125, height: 1508)
+        //scrollView.contentSize = CGSize(width: 375, height: 2500)
         scrollView.delegate = self
         
         // Whats wrong with this?
-        //scrollView.contentSize = CGSize(feedImageView.frame.size + messageView.frame.size)
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: scrollView.frame.origin.y + scrollView.frame.size.height)
         
         
         ////////////////////////////////////////
@@ -107,39 +107,43 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                 
                 messageView.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
                 
-                if translation.x > 0 && translation.x < 60 {
-                    // show grey, sliding right
-                    rightButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
-                    archiveIcon.alpha = 0.5
-                    deleteIcon.alpha = 0
-                    
-                } else if translation.x >= 60 && translation.x < 260 {
-                    // show green
-                    rightButtonSet.backgroundColor = UIColor(red:0.25, green:0.76, blue:0.43, alpha:1.00)
-                    archiveIcon.alpha = 1
-                    deleteIcon.alpha = 0                    
-                } else if translation.x >= 260 {
-                    // show red 
-                    rightButtonSet.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.19, alpha:1.00)
-                    archiveIcon.alpha = 0
-                    deleteIcon.alpha = 1
-                } else if translation.x < 0 && translation.x > -60 {
-                    // show grey, sliding left
-                    leftButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
-                    laterIcon.alpha = 0.5
-                    listIcon.alpha = 0
-                    
-                } else if translation.x <= -60 && translation.x > -260 {
-                    // show yellow
-                    leftButtonSet.backgroundColor = UIColor(red:0.97, green:0.91, blue:0.11, alpha:1.00)
-                    laterIcon.alpha = 1
-                    listIcon.alpha = 0
-                } else if translation.x <= -260 {
-                    // show brown
-                    leftButtonSet.backgroundColor = UIColor(red:0.55, green:0.34, blue:0.16, alpha:1.00)
-                    laterIcon.alpha = 0
-                    listIcon.alpha = 1
-                }
+                rightPanView.alpha = convertValue(inputValue: abs(translation.x), r1Min: 0, r1Max: 60, r2Min: 0, r2Max: 1)
+                
+                leftPanView.alpha = convertValue(inputValue: abs(translation.x), r1Min: 0, r1Max: 60, r2Min: 0, r2Max: 1)
+                
+//                if translation.x > 0 && translation.x < 60 {
+//                    // show grey, sliding right
+//                    rightButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
+//                    archiveIcon.alpha = 0.5
+//                    deleteIcon.alpha = 0
+//                    
+//                } else if translation.x >= 60 && translation.x < 260 {
+//                    // show green
+//                    rightButtonSet.backgroundColor = UIColor(red:0.25, green:0.76, blue:0.43, alpha:1.00)
+//                    archiveIcon.alpha = 1
+//                    deleteIcon.alpha = 0                    
+//                } else if translation.x >= 260 {
+//                    // show red 
+//                    rightButtonSet.backgroundColor = UIColor(red:1.00, green:0.23, blue:0.19, alpha:1.00)
+//                    archiveIcon.alpha = 0
+//                    deleteIcon.alpha = 1
+//                } else if translation.x < 0 && translation.x > -60 {
+//                    // show grey, sliding left
+//                    leftButtonSet.backgroundColor = UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.00)
+//                    laterIcon.alpha = 0.5
+//                    listIcon.alpha = 0
+//                    
+//                } else if translation.x <= -60 && translation.x > -260 {
+//                    // show yellow
+//                    leftButtonSet.backgroundColor = UIColor(red:0.97, green:0.91, blue:0.11, alpha:1.00)
+//                    laterIcon.alpha = 1
+//                    listIcon.alpha = 0
+//                } else if translation.x <= -260 {
+//                    // show brown
+//                    leftButtonSet.backgroundColor = UIColor(red:0.55, green:0.34, blue:0.16, alpha:1.00)
+//                    laterIcon.alpha = 0
+//                    listIcon.alpha = 1
+//                }
                 
             } else if sender.state == .ended {
                 
@@ -163,7 +167,10 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             {
             case 0:
                 UIView.animate(withDuration: 0.3) {
-                    self.laterFeedView.center.x = self.laterFeedView.center.x + 375
+                    self.scrollView.center.x = self.scrollView.frame.origin.x
+                    self.scrollView.center.y = self.scrollView.frame.origin.y
+                    self.laterFeedView.center.x = self.laterFeedView.frame.origin.x + 375
+                    self.laterFeedView.center.y = self.laterFeedView.frame.origin.y
                 }
             case 1:
                 // THIS NEEDS SOME WORK
@@ -178,7 +185,9 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                 scrollView.center.x = 0
             case 2:
                 UIView.animate(withDuration: 0.3) {
-                    self.archiveFeedView.center.x = self.archiveFeedView.center.x - 375                }
+                    self.archiveFeedView.center.x = self.archiveFeedView.center.x - 375
+                    self.archiveFeedView.center.y = self.archiveFeedView.frame.origin.y
+                }
             default:
                 break; 
             }
