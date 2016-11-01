@@ -138,6 +138,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jaJ-qN-Bjk" userLabel="didTouchRescheduleViewItem">
                                 <frame key="frameInset" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <action selector="didTouchRescheduleItem:" destination="Cvp-fz-QKm" eventType="touchUpInside" id="GjF-Hz-Bea"/>
                                 </connections>
