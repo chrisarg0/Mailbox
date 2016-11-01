@@ -16,7 +16,7 @@ Time spent: 7
   - [x] After 260 pts, the icon should change to the list icon and the background color should change to brown.
     - [x] Upon release, the message should continue to reveal the brown background. When the animation it complete, it should show the list options.
 
-- [ ] User can tap to dismiss the reschedule or list options. After the reschedule or list options are dismissed, you should see the message finish the hide animation.
+- [x] User can tap to dismiss the reschedule or list options. After the reschedule or list options are dismissed, you should see the message finish the hide animation.
 
 - [x] On dragging the message right:
   - [x] Initially, the revealed background color should be gray.
@@ -24,7 +24,7 @@ Time spent: 7
   - [x] After 60 pts, the archive icon should start moving with the translation and the background should change to green.
     - [ ] Upon release, the message should continue to reveal the green background. When the animation it complete, it should hide the message.
   - [x] After 260 pts, the icon should change to the delete icon and the background color should change to red.
-    - [ ] Upon release, the message should continue to reveal the red background. When the animation it complete, it should hide the message.
+    - [x] Upon release, the message should continue to reveal the red background. When the animation it complete, it should hide the message.
 
 
 #### Optional
@@ -33,14 +33,14 @@ Time spent: 7
   - [ ] If the menu is being revealed when the user lifts their finger, it should continue revealing.
   - [ ] If the menu is being hidden when the user lifts their finger, it should continue hiding.
 - [x] Tapping on compose should animate to reveal the compose view.
-- [ ] Tapping the segmented control in the title should swipe views in from the left or right.
+- [x] Tapping the segmented control in the title should swipe views in from the left or right.
 - [ ] Shake to undo.
 
 #### The following **additional** features are implemented:
 
-- [ ] I thought a 3D touch feature seemed appropriate for any leading email app, so I added it for Mailbox
-- [ ] I included a quick action to compose an email inside the 3D touch window - clicking "New Message" will bring you directly to your compose email view
-- [x] Added a timed activity indicator and "email sent" animations when user clicks "Send" button from Compose Email view controller
+- [x] I thought a 3D touch feature seemed appropriate for any leading email app, so I added it to Mailbox
+- [x] Originally I wanted a quick action to compose an email inside the 3D touch window - clicking "New Message" will bring you directly to your compose email view. Instead, I was only able to get the quick action to open the app
+- [x] Added a timed activity indicator and "email sent" confirmation animation when user clicks "Send" button from Compose Email view controller
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -58,5 +58,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+1 - getting the menu pan edge gesture to work (I spent too much time trying to be fancy and create a custom menu, and ran out of time)
+2 - performing a segue from my quick action
 
 * Any libraries or borrowed content.
