@@ -17,13 +17,13 @@ class MenuViewController : UIViewController {
         let translation = sender.translation(in: view)
         // 4
         let progress = MenuHelper.calculateProgress(
-            translationInView: translation,
+            translation,
             viewBounds: view.bounds,
-            direction: .Left
+            direction: .left
         )
         // 5
         MenuHelper.mapGestureStateToInteractor(
-            gestureState: sender.state,
+            sender.state,
             progress: progress,
             interactor: interactor){
                 // 6
@@ -35,4 +35,11 @@ class MenuViewController : UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+}
+
+func delay(seconds: Double, completion:@escaping ()->()) {
+    let popTime = DispatchTime.now() + Double(Int64( Double(NSEC_PER_SEC) * seconds )) / Double(NSEC_PER_SEC)
+    DispatchQueue.main.asyncAfter(deadline: popTime) {
+        completion()
+    }
 }

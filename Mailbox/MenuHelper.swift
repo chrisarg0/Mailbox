@@ -10,26 +10,28 @@ import Foundation
 import UIKit
 
 enum Direction {
-    case Up
-    case Down
-    case Left
-    case Right
+    case up
+    case down
+    case left
+    case right
 }
 
 struct MenuHelper {
     
     static let menuWidth:CGFloat = 0.8
+    
     static let percentThreshold:CGFloat = 0.3
+    
     static let snapshotNumber = 12345
     
-    static func calculateProgress(translationInView:CGPoint, viewBounds:CGRect, direction:Direction) -> CGFloat {
+    static func calculateProgress(_ translationInView:CGPoint, viewBounds:CGRect, direction:Direction) -> CGFloat {
         let pointOnAxis:CGFloat
         let axisLength:CGFloat
         switch direction {
-        case .Up, .Down:
+        case .up, .down:
             pointOnAxis = translationInView.y
             axisLength = viewBounds.height
-        case .Left, .Right:
+        case .left, .right:
             pointOnAxis = translationInView.x
             axisLength = viewBounds.width
         }
@@ -37,18 +39,18 @@ struct MenuHelper {
         let positiveMovementOnAxis:Float
         let positiveMovementOnAxisPercent:Float
         switch direction {
-        case .Right, .Down: // positive
+        case .right, .down: // positive
             positiveMovementOnAxis = fmaxf(Float(movementOnAxis), 0.0)
             positiveMovementOnAxisPercent = fminf(positiveMovementOnAxis, 1.0)
             return CGFloat(positiveMovementOnAxisPercent)
-        case .Up, .Left: // negative
+        case .up, .left: // negative
             positiveMovementOnAxis = fminf(Float(movementOnAxis), 0.0)
             positiveMovementOnAxisPercent = fmaxf(positiveMovementOnAxis, -1.0)
             return CGFloat(-positiveMovementOnAxisPercent)
         }
     }
     
-    static func mapGestureStateToInteractor(gestureState:UIGestureRecognizerState, progress:CGFloat, interactor: Interactor?, triggerSegue: () -> Void){
+    static func mapGestureStateToInteractor(_ gestureState:UIGestureRecognizerState, progress:CGFloat, interactor: Interactor?, triggerSegue: () -> ()){
         guard let interactor = interactor else { return }
         switch gestureState {
         case .began:
@@ -69,4 +71,5 @@ struct MenuHelper {
             break
         }
     }
+    
 }

@@ -23,10 +23,10 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
             else {
                 return
         }
-        // more code goes here
         let containerView = transitionContext.containerView
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
+        // replace main view with snapshot
         let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
         snapshot?.tag = MenuHelper.snapshotNumber
         snapshot?.isUserInteractionEnabled = false
@@ -37,7 +37,7 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
             animations: {
-                snapshot!.center.x += UIScreen.main.bounds.width * MenuHelper.menuWidth
+                snapshot?.center.x += UIScreen.main.bounds.width * MenuHelper.menuWidth
             },
             completion: { _ in
                 fromVC.view.isHidden = false

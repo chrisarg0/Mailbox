@@ -44,7 +44,7 @@ class ComposeEmailViewController: UIViewController {
                             self.emailConfirmation.transform = self.emailConfirmation.transform.scaledBy(x: 2.0, y: 2.0)
                             self.emailConfirmationText.alpha = 1
                             
-                            self.emailConfirmationText.transform = self.emailConfirmationText.transform.scaledBy(x: 0.8, y: 0.8)
+                            self.emailConfirmationText.transform = self.emailConfirmationText.transform.scaledBy(x: 1.0, y: 1.0)
                             
                 }, completion: nil)
             self.emailConfirmation.isHidden = false
